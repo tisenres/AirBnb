@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct ListingDetailView: View {
     
@@ -115,11 +116,68 @@ struct ListingDetailView: View {
             
             Divider()
             
-            VStack {
-                
+            // listing amenites
+            VStack(alignment: .leading, spacing: 16) {
+                Text("What this place offers")
+                    .font(.headline)
+                ForEach(0 ..< 5) { feature in
+                    HStack {
+                        Image(systemName: "wifi")
+                            .frame(width: 32)
+                        Text("Wifi")
+                            .font(.footnote)
+                        Spacer()
+                    }
+                }
             }
+            .padding()
             
             
+            Divider()
+            
+            VStack(alignment: .leading, spacing: 16) {
+                Text("Where you will be")
+                    .font(.headline)
+                Map()
+                    .frame(height: 200)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+            .padding()
+        }
+        .padding(.bottom, 64)
+        .overlay(alignment: .bottom) {
+            VStack {
+                Divider()
+                    .padding(.bottom)
+                
+                HStack {
+                    VStack(alignment: .leading) {
+                       Text("$500")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                        Text("Total before taxes")
+                            .font(.footnote)
+                        Text("Oct 15 - 20")
+                            .font(.footnote)
+                            .fontWeight(.semibold)
+                            .underline()
+                    }
+                    
+                    Spacer()
+                    
+                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                        Text("Reserve")
+                            .foregroundStyle(.white)
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .frame(width: 140, height: 40)
+                            .background(.pink)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                    }
+                    .padding(.horizontal, 32)
+                }
+            }
+            .background(.white)
         }
     }
 }
