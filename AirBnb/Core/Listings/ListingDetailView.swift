@@ -10,10 +10,26 @@ import MapKit
 
 struct ListingDetailView: View {
     
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         ScrollView {
-            ListingImageCarouselView()
-                .frame(height: 320)
+            ZStack(alignment: .topLeading) {
+                ListingImageCarouselView()
+                    .frame(height: 320)
+                Button(action: {
+                    dismiss()
+                }) {
+                    Image(systemName: "chevron.left")
+                        .foregroundStyle(.black)
+                        .background(Circle()
+                            .fill(.white)
+                            .frame(width: 32, height: 32))
+                        .padding(32)
+                }
+                
+
+            }
             VStack(alignment: .leading, spacing: 8) {
                 Text("Miami Villa")
                     .font(.title)
@@ -144,6 +160,7 @@ struct ListingDetailView: View {
             }
             .padding()
         }
+        .ignoresSafeArea()
         .padding(.bottom, 64)
         .overlay(alignment: .bottom) {
             VStack {
@@ -174,8 +191,8 @@ struct ListingDetailView: View {
                             .background(.pink)
                             .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
-                    .padding(.horizontal, 32)
                 }
+                .padding(.horizontal, 32)
             }
             .background(.white)
         }
